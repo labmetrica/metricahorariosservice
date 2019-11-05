@@ -5,7 +5,6 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +34,7 @@ public class HorariosDashboard {
         String url = "http://" + instanceInfo.getIPAddr() + ":" +
                 instanceInfo.getPort() + "/" + "/clientes/buscarPorID/" + integer ;
 
-        usuarios usuarios = restTemplate.getForObject(url, com.metrica.formacion.metricahorariosservice.entity.usuarios.class);
+        usuarios usuarios = restTemplate.getForObject(url, usuarios.class);
 
         return usuarios;
     }
