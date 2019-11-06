@@ -7,7 +7,7 @@ public class grupos {
 
     private int id;
     private LocalTime nombre;
-    private int huecos;
+    private int huecos = 12;
     private LocalDateTime createdAT;
     private LocalDateTime ultimaModificacion;
 

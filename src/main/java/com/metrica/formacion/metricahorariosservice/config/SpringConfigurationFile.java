@@ -1,6 +1,11 @@
 package com.metrica.formacion.metricahorariosservice.config;
 
+import com.fasterxml.jackson.databind.cfg.MapperBuilder;
+import com.metrica.formacion.metricahorariosservice.dto.usuariosMapper;
 import com.netflix.appinfo.AmazonInfo;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -26,5 +31,4 @@ public class SpringConfigurationFile {
 
         return restTemplateBuilder.build();
     }
-
 }
