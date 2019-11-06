@@ -5,6 +5,7 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,19 +24,31 @@ public class HorariosDashboard {
     @Autowired
     private EurekaClient eurekaClient;
 
-    private String servicioUsuarios = "api-usuarios";
+    @Value("servicioUsuarios")
+    private String servicioUsuarios;
+
+    @Value("servicioGrupos")
+    private String servicioGrupos;
+
+    /*GET*/
 
     @GetMapping("/buscarPorId/{key}")
-    public usuarios buscarPorId(@PathVariable("key") Integer integer){
+    public usuarios buscarPorId(@PathVariable("key") Integer integer) {
 
         Application application = eurekaClient.getApplication(servicioUsuarios);
         InstanceInfo instanceInfo = application.getInstances().get(0);
 
         String url = "http://" + instanceInfo.getIPAddr() + ":" +
-                instanceInfo.getPort() + "/" + "/clientes/buscarPorID/" + integer ;
+                instanceInfo.getPort() + "/" + "/clientes/buscarPorID/" + integer;
 
         usuarios usuarios = restTemplate.getForObject(url, usuarios.class);
 
         return usuarios;
     }
+
+    /*POST*/
+
+    /*GET*/
+
+    /*DELETE*/
 }

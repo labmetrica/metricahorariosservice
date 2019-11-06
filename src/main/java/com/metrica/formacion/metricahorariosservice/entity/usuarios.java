@@ -15,7 +15,7 @@ public class usuarios {
 
     //Constructor
 
-    public usuarios(){
+    public usuarios() {
         createdAT = LocalDateTime.now();
     }
 
