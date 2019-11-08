@@ -5,16 +5,13 @@ import com.metrica.formacion.metricahorariosservice.entity.usuarios;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = SpringConfigurationFile.class)
 class usuariosMapperTest {
 
     @Autowired
-    private usuariosMapper usuariosMapper;
+    private com.metrica.formacion.metricahorariosservice.dto.usuariosMapper usuariosMapper;
 
     @Test
     void testToUsuariosDTTO(){

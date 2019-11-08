@@ -9,13 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(classes = SpringConfigurationFile.class)
 class gruposMapperTest {
 
     @Autowired
-    private gruposMapper gruposMapper;
+    private com.metrica.formacion.metricahorariosservice.dto.gruposMapper gruposMapper;
 
     @Test
     void testToUsuariosDTTO(){

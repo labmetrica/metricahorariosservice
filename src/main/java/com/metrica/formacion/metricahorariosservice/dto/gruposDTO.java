@@ -1,7 +1,6 @@
 package com.metrica.formacion.metricahorariosservice.dto;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

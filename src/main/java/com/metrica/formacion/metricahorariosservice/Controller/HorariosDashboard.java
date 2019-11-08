@@ -41,7 +41,7 @@ public class HorariosDashboard {
         String url = "http://" + instanceInfo.getIPAddr() + ":" +
                 instanceInfo.getPort() + "/" + "/clientes/buscarPorID/" + integer;
 
-        usuarios usuarios = restTemplate.getForObject(url, usuarios.class);
+        usuarios usuarios = restTemplate.getForObject(url, com.metrica.formacion.metricahorariosservice.entity.usuarios.class);
 
         return usuarios;
     }

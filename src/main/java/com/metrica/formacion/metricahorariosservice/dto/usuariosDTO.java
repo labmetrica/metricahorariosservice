@@ -1,7 +1,5 @@
 package com.metrica.formacion.metricahorariosservice.dto;
 
-import java.time.LocalDateTime;
-
 public class usuariosDTO {
 
     private int id;

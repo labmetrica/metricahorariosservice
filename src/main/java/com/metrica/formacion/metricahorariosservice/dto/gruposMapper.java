@@ -1,8 +1,6 @@
 package com.metrica.formacion.metricahorariosservice.dto;
 
 import com.metrica.formacion.metricahorariosservice.entity.grupos;
-import com.metrica.formacion.metricahorariosservice.entity.usuarios;
-import org.mapstruct.MapMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

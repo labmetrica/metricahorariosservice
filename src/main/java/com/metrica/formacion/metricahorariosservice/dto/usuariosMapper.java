@@ -17,5 +17,5 @@ public interface usuariosMapper {
 
     List<usuariosDTO> tousuariosDTOs(List<usuarios> usuarios);
 
-    usuarios togrupos(usuariosDTO usuariosDTO);
+    usuarios tousuario(usuariosDTO usuariosDTO);
 }
