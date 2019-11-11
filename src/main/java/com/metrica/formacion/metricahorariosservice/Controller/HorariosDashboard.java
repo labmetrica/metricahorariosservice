@@ -86,13 +86,18 @@ public class HorariosDashboard {
     @GetMapping("/buscarGrupoPorId/{key}")
     public gruposDTO buscarGrupoPorId(@PathVariable("key") Integer id) {
 
-        return gruposService.buscarPorID(id);
+        gruposDTO grupo = gruposService.buscarPorID(id);
+        grupo.setListaUsuarios(buscarUsuarioPorGrupo(id));
+        return grupo;
     }
 
     @GetMapping("/buscarGrupoPorNombre/{key}")
     public gruposDTO buscarGrupoPorNombre(@PathVariable("key") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime nombre) {
 
-        return gruposService.buscarPorNombre(nombre);
+
+        gruposDTO grupo = gruposService.buscarPorNombre(nombre);
+        grupo.setListaUsuarios(buscarUsuarioPorGrupo(grupo.getId()));
+        return grupo;
     }
 
     /*POST*/

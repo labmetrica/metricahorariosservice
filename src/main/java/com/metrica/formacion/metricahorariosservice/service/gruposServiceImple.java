@@ -69,7 +69,7 @@ public class gruposServiceImple implements gruposService{
     @Override
     public gruposDTO buscarPorID(Integer id) {
 
-        String url = restCliente.getURL(servicioGrupos, "/grupos/buscarPorId/");
+        String url = restCliente.getURL(servicioGrupos, "/grupos/buscarPorId/" + id);
 
         return gruposMapper.togruposDTO(restTemplate.getForObject(url,grupos.class));
     }
