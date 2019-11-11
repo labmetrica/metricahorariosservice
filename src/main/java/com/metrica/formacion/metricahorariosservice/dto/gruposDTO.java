@@ -1,6 +1,7 @@
 package com.metrica.formacion.metricahorariosservice.dto;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,10 +10,10 @@ public class gruposDTO {
     private int id;
     private LocalTime nombre;
     private int huecos;
-    private List<usuariosDTO> listaUsuarios;
+    private List<usuariosDTO> listaUsuarios = new ArrayList<>(12);
 
     public gruposDTO(){
-        listaUsuarios = Arrays.asList(new usuariosDTO[12]);
+        //listaUsuarios = Arrays.asList(new usuariosDTO[12]);
     }
 
     public int getId() {
@@ -77,7 +78,7 @@ public class gruposDTO {
 
         if(listaUsuarios == null){
 
-            listaUsuarios = Arrays.asList(new usuariosDTO[12]);
+            listaUsuarios = new ArrayList<>(12);
             listaUsuarios.add(usuarioDTO);
             huecos--;
 

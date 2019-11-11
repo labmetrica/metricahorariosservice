@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -40,21 +41,71 @@ public class usuariosServiceImple implements usuariosService {
 
     @Override
     public void borrarUsuario(Integer id) {
-        restTemplate.delete(restCliente.getURL(servicioUsuarios, "",id.toString()));
+        restTemplate.delete(restCliente.getURL(servicioUsuarios, "/clientes/borrarUsuario",id.toString()));
     }
 
     @Override
-    public void guardarUsuario(usuariosDTO usuariosDTO) {
+    public ResponseEntity<usuarios> guardarUsuario(usuariosDTO usuariosDTO) {
 
-        String url = restCliente.getURL(servicioUsuarios,"");
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/guardarUsuario");
 
-        //restTemplate.postForObject(url,usuariosMapper.tousuario(usuariosDTO), ResponseEntity.class);
+        return restTemplate.postForEntity(url,usuariosMapper.tousuario(usuariosDTO), usuarios.class);
     }
 
     @Override
     public List<usuariosDTO> listarUsuarios() {
 
-        String url = restCliente.getURL(servicioUsuarios,"servicioUsuarios.listaClientes");
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/lista-clientes");
+
+        return usuariosMapper.tousuariosDTOs(getListaClientes(url));
+    }
+
+    @Override
+    public ResponseEntity<usuarios> actualizarUsuarios(usuariosDTO usuarios) {
+
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/guardarUsuario");
+
+        return restTemplate.postForEntity(url,usuariosMapper.tousuario(usuarios), usuarios.class);
+    }
+
+    @Override
+    public usuariosDTO buscarPorID(Integer id) {
+
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/buscarPorID/",id.toString());
+
+        return usuariosMapper.tousuariosDTO(restTemplate.getForObject(url,usuarios.class));
+    }
+
+    @Override
+    public List<usuariosDTO> buscarPorGrupo(Integer id) {
+
+        String url = restCliente.getURL(servicioUsuarios, "/clientes/buscarPorGrupo/",id.toString());
+
+        return usuariosMapper.tousuariosDTOs(getListaClientes(url));
+    }
+
+    @Override
+    public List<usuariosDTO> buscarPorNombre(String nombre) {
+
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/buscarPorNombre/",nombre);
+
+        return usuariosMapper.tousuariosDTOs(getListaClientes(url));
+    }
+
+    @Override
+    public List<usuariosDTO> buscarPorApellido(String apellido) {
+
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/buscarPorApellido/",apellido);
+
+        return usuariosMapper.tousuariosDTOs(getListaClientes(url));
+    }
+
+    @Override
+    public List<usuariosDTO> buscarPorNombreoApellido(String nombre, String apellido) {
+        return null;
+    }
+
+    private List<usuarios> getListaClientes(String url){
 
         HttpEntity<List<usuarios>> entity = new HttpEntity<>(null,headers);
 
@@ -62,23 +113,6 @@ public class usuariosServiceImple implements usuariosService {
 
         ResponseEntity<List<usuarios>> resp = restTemplate.exchange(url, HttpMethod.GET, entity, responseType);
 
-        return usuariosMapper.tousuariosDTOs(resp.getBody());
-    }
-
-    @Override
-    public void actualizarUsuarios(usuarios usuarios) {
-
-        String url = restCliente.getURL("api-usuarios","servicioUsuarios.guardarUsuario");
-
-    }
-
-    @Override
-    public usuariosDTO buscarPorID(Integer id) {
-        return null;
-    }
-
-    @Override
-    public List<usuariosDTO> buscarPorNomre(String nombre) {
-        return null;
+        return resp.getBody();
     }
 }
