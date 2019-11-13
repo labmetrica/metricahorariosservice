@@ -163,13 +163,13 @@ public class HorariosDashboard {
 
 	private List<gruposDTO> getGruposMasUsuarios(List<gruposDTO> gruposDTOS, List<usuariosDTO> usuariosDTOS) {
 
-		for (int i = 0; i < gruposDTOS.size(); i++) {
+		for (gruposDTO grupoDTOS: gruposDTOS) {
 
-			for (int e = 0; e < usuariosDTOS.size(); e++) {
+			for (usuariosDTO usuarioDTO: usuariosDTOS) {
 
-				if (gruposDTOS.get(i).getId() == usuariosDTOS.get(e).getGrupo()) {
+				if(grupoDTOS.getId() == usuarioDTO.getGrupo()){
 
-					gruposDTOS.get(i).agregarUsuario(usuariosDTOS.get(e));
+					grupoDTOS.agregarUsuario(usuarioDTO);
 				}
 			}
 		}
