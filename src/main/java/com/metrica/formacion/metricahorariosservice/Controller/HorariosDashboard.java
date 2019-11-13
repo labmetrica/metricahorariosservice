@@ -215,7 +215,6 @@ public class HorariosDashboard {
 			final int id = listaUsuariosDTO.get(i).getId();
 			final String nombre = listaUsuariosDTO.get(i).getNombre();
 			final String apellido = listaUsuariosDTO.get(i).getApellido();
-
 			final Usuario usuario = new Usuario(id, nombre, apellido);
 
 			listaUsuarios.add(usuario);
