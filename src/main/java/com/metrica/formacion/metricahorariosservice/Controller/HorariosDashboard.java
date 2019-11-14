@@ -33,6 +33,7 @@ import apiexcelmetrica.modelo.Grupo;
 import apiexcelmetrica.modelo.Usuario;
 import apiexcelmetrica.util.ExcelUtils;
 
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RefreshScope
 @RestController
 @RequestMapping("/serviceMetrica")
