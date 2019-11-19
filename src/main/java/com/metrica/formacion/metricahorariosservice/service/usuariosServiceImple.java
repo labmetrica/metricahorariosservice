@@ -37,7 +37,7 @@ public class usuariosServiceImple implements usuariosService {
     @Value("${servicioGrupos.name}")
     private String servicioGrupos;
 
-    HttpHeaders headers = new HttpHeaders();
+    private HttpHeaders headers = new HttpHeaders();
 
     @Override
     public void borrarUsuario(Integer id) {
