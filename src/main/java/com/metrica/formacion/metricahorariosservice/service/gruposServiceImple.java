@@ -40,7 +40,7 @@ public class gruposServiceImple implements gruposService {
 
 	@Override
 	public void borrarGrupo(Integer id) {
-		restTemplate.delete(restCliente.getURL(servicioGrupos, "/grupos/borrarPorId/", id.toString()));
+		restTemplate.delete(restCliente.getURL(servicioGrupos, "/grupos/borrarGrupo/", id.toString()));
 	}
 
 	@Override
