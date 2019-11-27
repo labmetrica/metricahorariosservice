@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,6 +28,7 @@ import com.metrica.formacion.metricahorariosservice.service.usuariosService;
 import apiexcelmetrica.modelo.Grupo;
 import apiexcelmetrica.modelo.Usuario;
 import apiexcelmetrica.util.ExcelUtils;
+import org.springframework.web.client.RestTemplate;
 
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RefreshScope
@@ -39,6 +41,9 @@ public class HorariosDashboard {
 
 	@Value("@{servicioGrupos.name}")
 	private String servicioGrupos;
+
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@Autowired
 	private usuariosService usuariosService;
