@@ -45,13 +45,21 @@ public class eurekaClientGetServiceURL {
     public String getURL(String serviceURI, String direccion, String parametro) {
 
         Application application = eurekaClient.getApplication(serviceURI);
-        InstanceInfo instanceInfo = application.getInstances().get(0);
 
-        String url = "http://" + instanceInfo.getIPAddr() + ":" +
-                instanceInfo.getPort() + "/" + direccion + parametro;
+        if(application != null){
 
-        log.info("url --> " + url);
+            InstanceInfo instanceInfo = application.getInstances().get(0);
 
-        return url;
+            String url = "http://" + instanceInfo.getIPAddr() + ":" +
+                    instanceInfo.getPort() + "/" + direccion + parametro;
+
+            log.info("url --> " + url);
+
+            return url;
+        }
+
+        else{
+            return null;
+        }
     }
 }
