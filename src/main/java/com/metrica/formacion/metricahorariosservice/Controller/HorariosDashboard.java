@@ -6,6 +6,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.metrica.formacion.metricahorariosservice.exceptionHandler.CustomErrorResponse;
+import lombok.extern.log4j.Log4j2;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,9 @@ import apiexcelmetrica.modelo.Usuario;
 import apiexcelmetrica.util.ExcelUtils;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.constraints.Null;
+
+@Log4j2
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RefreshScope
 @RestController
@@ -106,17 +112,28 @@ public class HorariosDashboard {
 	@GetMapping("/buscarGrupoPorId/{key}")
 	public gruposDTO buscarGrupoPorId(@PathVariable("key") Integer id) {
 
-		final gruposDTO grupo = gruposService.buscarPorID(id);
-		grupo.setListaUsuarios(buscarUsuarioPorGrupo(id));
+		gruposDTO grupo = gruposService.buscarPorID(id);
+
+		try {
+			grupo.setListaUsuarios(buscarUsuarioPorGrupo(id));
+		} catch (NullPointerException e) {
+			grupo.setListaUsuarios(null);
+			log.error("Servicio de usuarios no disponible");
+		}
 		return grupo;
 	}
 
 	@GetMapping("/buscarGrupoPorNombre/{key}")
-	public gruposDTO buscarGrupoPorNombre(
-			@PathVariable("key") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime nombre) {
+	public gruposDTO buscarGrupoPorNombre(@PathVariable("key") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime nombre) {
 
-		final gruposDTO grupo = gruposService.buscarPorNombre(nombre);
-		grupo.setListaUsuarios(buscarUsuarioPorGrupo(grupo.getId()));
+		gruposDTO grupo = gruposService.buscarPorNombre(nombre);
+
+		try {
+			grupo.setListaUsuarios(buscarUsuarioPorGrupo(grupo.getId()));
+		} catch (NullPointerException e) {
+			grupo.setListaUsuarios(null);
+			log.error("Servicio de usuarios no disponible");
+		}
 		return grupo;
 	}
 

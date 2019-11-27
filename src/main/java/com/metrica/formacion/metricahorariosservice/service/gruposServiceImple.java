@@ -46,7 +46,7 @@ public class gruposServiceImple implements gruposService {
 	@Override
 	public ResponseEntity<grupos> guardarGrupo(gruposDTO grupos) {
 
-		final String url = restCliente.getURL(servicioGrupos, "/grupos/crearGrupo");
+		String url = restCliente.getURL(servicioGrupos, "/grupos/crearGrupo");
 
 		return restTemplate.postForEntity(url, gruposMapper.togrupos(grupos), grupos.class);
 	}
@@ -54,7 +54,7 @@ public class gruposServiceImple implements gruposService {
 	@Override
 	public List<gruposDTO> listarGrupos() {
 
-		final String url = restCliente.getURL(servicioGrupos, "/grupos/lista-grupos");
+		String url = restCliente.getURL(servicioGrupos, "/grupos/lista-grupos");
 
 		return gruposMapper.togruposDTOs(getListaGrupos(url));
 	}
@@ -62,7 +62,7 @@ public class gruposServiceImple implements gruposService {
 	@Override
 	public ResponseEntity<grupos> actualizarGrupo(gruposDTO grupos) {
 
-		final String url = restCliente.getURL(servicioGrupos, "/grupos/actualizarGrupo");
+		String url = restCliente.getURL(servicioGrupos, "/grupos/actualizarGrupo");
 
 		return restTemplate.postForEntity(url, gruposMapper.togrupos(grupos), grupos.class);
 	}
@@ -70,7 +70,7 @@ public class gruposServiceImple implements gruposService {
 	@Override
 	public gruposDTO buscarPorID(Integer id) {
 
-		final String url = restCliente.getURL(servicioGrupos, "/grupos/buscarPorId/" + id);
+		String url = restCliente.getURL(servicioGrupos, "/grupos/buscarPorId/" + id);
 
 		return gruposMapper.togruposDTO(restTemplate.getForObject(url, grupos.class));
 	}
@@ -78,19 +78,19 @@ public class gruposServiceImple implements gruposService {
 	@Override
 	public gruposDTO buscarPorNombre(LocalTime localTime) {
 
-		final String url = restCliente.getURL(servicioGrupos, "/grupos/buscarPorNombre/", localTime.toString());
+		String url = restCliente.getURL(servicioGrupos, "/grupos/buscarPorNombre/", localTime.toString());
 
 		return gruposMapper.INSTANCE.togruposDTO(restTemplate.getForObject(url, grupos.class));
 	}
 
 	private List<grupos> getListaGrupos(String url) {
 
-		final HttpEntity<List<grupos>> entity = new HttpEntity<>(null, headers);
+		HttpEntity<List<grupos>> entity = new HttpEntity<>(null, headers);
 
-		final ParameterizedTypeReference<List<grupos>> responseType = new ParameterizedTypeReference<List<grupos>>() {
+		ParameterizedTypeReference<List<grupos>> responseType = new ParameterizedTypeReference<List<grupos>>() {
 		};
 
-		final ResponseEntity<List<grupos>> resp = restTemplate.exchange(url, HttpMethod.GET, entity, responseType);
+		ResponseEntity<List<grupos>> resp = restTemplate.exchange(url, HttpMethod.GET, entity, responseType);
 
 		return resp.getBody();
 	}

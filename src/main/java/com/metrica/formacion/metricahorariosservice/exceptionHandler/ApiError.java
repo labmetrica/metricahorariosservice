@@ -32,9 +32,9 @@ public class ApiError {
 	}
 
 	public ApiError(HttpStatus status, String mensaje, String exceptionMessage) {
-		this.status = status;
-		this.fecha = LocalDateTime.now();
-		this.mensaje = mensaje;
-		this.exceptionMessage = exceptionMessage;
-	}
+        this.status = status;
+        this.fecha = LocalDateTime.now();
+        this.mensaje = mensaje;
+        this.exceptionMessage = exceptionMessage;
+    }
 }
