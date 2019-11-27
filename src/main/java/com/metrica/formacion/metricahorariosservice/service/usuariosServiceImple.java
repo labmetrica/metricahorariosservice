@@ -1,5 +1,6 @@
 package com.metrica.formacion.metricahorariosservice.service;
 
+import apiexcelmetrica.modelo.Usuario;
 import com.metrica.formacion.metricahorariosservice.dto.usuariosDTO;
 import com.metrica.formacion.metricahorariosservice.dto.usuariosMapper;
 import com.metrica.formacion.metricahorariosservice.entity.usuarios;
@@ -8,12 +9,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -73,8 +73,21 @@ public class usuariosServiceImple implements usuariosService {
 
         String url = restCliente.getURL(servicioUsuarios,"/clientes/buscarPorID/",id.toString());
 
-        return usuariosMapper.tousuariosDTO(restTemplate.getForObject(url,usuarios.class));
+        ResponseEntity<usuariosDTO> responseEntity = null;
+
+        responseEntity = restTemplate.getForEntity(url, usuariosDTO.class);
+
+        return responseEntity.getBody();
     }
+
+    /*
+    @Override
+    public usuariosDTO buscarPorID(Integer id) {
+
+        String url = restCliente.getURL(servicioUsuarios,"/clientes/buscarPorID/",id.toString());
+
+        return usuariosMapper.tousuariosDTO(restTemplate.getForObject(url,usuarios.class));
+    }*/
 
     @Override
     public List<usuariosDTO> buscarPorGrupo(Integer id) {

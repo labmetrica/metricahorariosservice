@@ -8,6 +8,9 @@ import java.util.List;
 
 import com.metrica.formacion.metricahorariosservice.exceptionHandler.CustomErrorResponse;
 import lombok.extern.log4j.Log4j2;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
